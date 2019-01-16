@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<classPathEntry
+			location="C:\repository\mysql\mysql-connector-java\5.1.47/mysql-connector-java-5.1.47.jar" />
+	<context id="MySqlTables" targetRuntime="MyBatis3">
+				
+	    <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        
+        <!-- 生成的Java文件的编码 -->
+	    <property name="javaFileEncoding" value="UTF-8"/>
+	    <!-- 格式化java代码 -->
+	    <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+	    <!-- 格式化XML代码 -->
+	    <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+			
+          
+         <!--自定义批量插入--> 
+        <plugin type="com.gj.core.plugin.BatchInsertPlugin"></plugin>
+        
+        <!--自定义批量更新--> 
+        <plugin type="com.gj.core.plugin.BatchUpdatePlugin"></plugin>
+        
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>          
+		
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		
+		
+		<!-- 本地数据库 -->
+		<!-- ORACLE -->
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" 
+						connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" 
+						userId="root" password="123456">
+        </jdbcConnection>-->
+		<!-- MYSQL -->
+		<!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/learn"
+		userId="root" password="Finecredit@1234"/>-->
+		<!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://localhost:3306/lehappy"
+						userId="root" password="1234"/>-->
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://47.92.211.13:33006/lehappy"
+						userId="root" password="lehappy"/>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		
+		
+		<javaModelGenerator targetPackage="com.gj.app.entity" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+	
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.gj.app.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>	
+		
+		<table tableName="tb_%">
+		   
+		</table>	
+		<!--table tableName="T_RES_LOG">		   
+		</table>
+		<table tableName="TMP_RES_LOG">		   
+		</table-->
+		
+		
+		
+		
+		
+		
+		
+		<!--enableInsert ="true" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" -->
+	</context>
+</generatorConfiguration>
