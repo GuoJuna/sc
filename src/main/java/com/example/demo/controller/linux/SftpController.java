@@ -1,9 +1,10 @@
-package com.example.demo.controller;
+package com.example.demo.controller.linux;
 
 import cn.hutool.extra.ssh.JschUtil;
 import cn.hutool.extra.ssh.Sftp;
 import com.example.demo.configurer.property.SftpProperty;
 import com.example.demo.support.AjaxResult;
+import com.example.demo.util.CommandUtil;
 import com.example.demo.util.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -13,7 +14,9 @@ import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -66,6 +69,35 @@ public class SftpController {
 
 		//关闭连接
 		sftp.close();
+		return ResultUtil.renderSuccessMsg("成功");
+	}
+
+
+	@ApiOperation(value = "上传文件", httpMethod = "POST", produces = "application/json",consumes = "application/json")
+	@ApiResponse(code = 200, message = "success")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "file",value = "文件",dataType = "MultipartFile", allowMultiple = true)
+	})
+	@RequestMapping("putLe")
+	public AjaxResult putLe(MultipartFile file) throws IOException {
+		String partialPath = "/usr/local/nginx/html/lehappyh5";
+
+		String fileName = file.getOriginalFilename();
+		String tempPath = "c:/temp/";
+		String path = tempPath+fileName;
+		File dest = new File(path);
+		file.transferTo(dest);
+		Sftp sftp= JschUtil.createSftp("39.98.51.43", 22, "root", "Lehappy1234");
+		//进入远程目录
+		sftp.cd(partialPath);
+		//上传本地文件
+		sftp.put(path, partialPath);
+		//下载远程文件
+		//sftp.get("/usr/local/nginx/html/index.html", "c:/test/index.html");
+
+		//关闭连接
+		sftp.close();
+		CommandUtil.cmdTar("tar -xvf "+partialPath+"/"+fileName+" -C "+partialPath);
 		return ResultUtil.renderSuccessMsg("成功");
 	}
 
