@@ -1,5 +1,6 @@
 package com.gj.app.controller;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 	@RequestMapping("hello")
-	public String hello(){
+	public String hello(String hello){
+		if(StrUtil.isNotBlank(hello)){
+			return hello;
+		}
 		return "hello";
 	}
 }

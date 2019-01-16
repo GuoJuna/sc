@@ -17,7 +17,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,7 +49,7 @@ public class LogAspect {
         sb.append("\nIP地址 : " + HttpUtil.getClientIP(request));
         sb.append("\n控制器 : " + joinPoint.getSignature().getDeclaringTypeName());
         sb.append("\n方法 : "  + joinPoint.getSignature().getName());
-        sb.append("\n参数 : " + Arrays.toString(joinPoint.getArgs())).append("\n");
+        sb.append("\n参数 : " + JSONUtil.toJsonStr(request.getParameterMap())).append("\n");
         log.info(sb.toString());
 
     }
