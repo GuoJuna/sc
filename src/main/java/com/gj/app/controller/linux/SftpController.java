@@ -56,8 +56,8 @@ public class SftpController {
 	})
 	@RequestMapping("putLe")
 	public AjaxResult putLe(MultipartFile file) throws IOException {
-		//上传目录
-		String partialPath = "/usr/local/nginx/html/lehappyh5";
+		//上传目录  只需修改--上传路径
+		String partialPath = "/usr/local/nginx/html";
 
 		String fileName = file.getOriginalFilename();
 		String tempPath = "c:/temp/";
@@ -78,7 +78,10 @@ public class SftpController {
 
 		//执行shell命令
 		CommandUtil rec=new CommandUtil(sftpProperty.getIp(), sftpProperty.getUserName(),sftpProperty.getPassword());
-		CommandUtil.cmdTar(rec,"tar -xvf "+partialPath+"/"+fileName+" -C "+partialPath);
+		//CommandUtil.cmdTar(rec,"tar -xvf "+partialPath+"/"+fileName+" -C "+partialPath);
+		//CommandUtil.cmdTar(rec,"tar -xvf "+partialPath+"/"+fileName);
+		System.out.println("unrar x "+partialPath+"/"+fileName);
+		CommandUtil.cmdTar(rec,"unrar x -y "+partialPath+"/"+fileName+" "+partialPath );
 		return ResultUtil.renderSuccessMsg("成功");
 	}
 

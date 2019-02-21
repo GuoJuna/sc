@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gj.app.mapper.SysExpenseMapper">
+  <resultMap id="BaseResultMap" type="com.gj.app.entity.SysExpense">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="processId" jdbcType="VARCHAR" property="processid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, money, desc, createtime, state, userid, processId
+  </sql>
+  <select id="selectByExample" parameterType="com.gj.app.entity.SysExpenseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_expense
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gj.app.entity.SysExpenseExample">
+    delete from sys_expense
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gj.app.entity.SysExpense">
+    insert into sys_expense (id, money, desc, 
+      createtime, state, userid, 
+      processId)
+    values (#{id,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, #{desc,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{processid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gj.app.entity.SysExpense">
+    insert into sys_expense
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="desc != null">
+        desc,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="processid != null">
+        processId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="processid != null">
+        #{processid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gj.app.entity.SysExpenseExample" resultType="java.lang.Long">
+    select count(*) from sys_expense
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_expense
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.desc != null">
+        desc = #{record.desc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.processid != null">
+        processId = #{record.processid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_expense
+    set id = #{record.id,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DECIMAL},
+      desc = #{record.desc,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      processId = #{record.processid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <insert id="batchInsert" parameterType="list">
+    insert into sys_expense
+      (id,money,desc,
+      createtime,state,userid,
+      processId)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," > 
+      ( #{ item.id, jdbcType=INTEGER},#{ item.money, jdbcType=DECIMAL},#{ item.desc, jdbcType=VARCHAR},
+      #{ item.createtime, jdbcType=TIMESTAMP},#{ item.state, jdbcType=INTEGER},#{ item.userid, jdbcType=INTEGER},
+      #{ item.processid, jdbcType=VARCHAR}) 
+    </foreach>
+  </insert>
+  <update id="batchUpdate" parameterType="list">
+    <foreach collection="list" item="item" index="index" separator=";" > 
+      update sys_expense 
+      <set>
+        <if test="item.id != null"> 
+          id = #{item.id, jdbcType = INTEGER},
+        </if> 
+        <if test="item.money != null"> 
+          money = #{item.money, jdbcType = DECIMAL},
+        </if> 
+        <if test="item.desc != null"> 
+          desc = #{item.desc, jdbcType = VARCHAR},
+        </if> 
+        <if test="item.createtime != null"> 
+          createtime = #{item.createtime, jdbcType = TIMESTAMP},
+        </if> 
+        <if test="item.state != null"> 
+          state = #{item.state, jdbcType = INTEGER},
+        </if> 
+        <if test="item.userid != null"> 
+          userid = #{item.userid, jdbcType = INTEGER},
+        </if> 
+        <if test="item.processid != null"> 
+          processId = #{item.processid, jdbcType = VARCHAR},
+        </if> 
+      </set>
+      <where>
+      </where>
+    </foreach>
+  </update>
+</mapper>
