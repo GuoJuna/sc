@@ -50,7 +50,7 @@ public class LehappyAdminController {
 	@RequestMapping("start")
 	public AjaxResult<Object> start(){
 		CommandUtil rec=new CommandUtil(sftpProperty.getIp(), sftpProperty.getUserName(),sftpProperty.getPassword());
-		String rs = CommandUtil.cmdTar(rec, "cd /usr/local/springboot && sh lehappyadmin-start.sh");
+		String rs = CommandUtil.cmdTar2(rec, "cd /usr/local/springboot && sh lehappyadmin-start.sh");
 		return ResultUtil.renderSuccessMsg(rs);
 	}
 
