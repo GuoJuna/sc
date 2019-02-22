@@ -22,6 +22,7 @@ package com.gj.app.util;
  * @since V0.1
  */
 
+import ch.ethz.ssh2.ChannelCondition;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
@@ -32,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 
@@ -61,7 +63,7 @@ public class CommandUtil {
 
 	}
 
-	public static void  cmdTar(CommandUtil rec,String cmd){
+	public static String  cmdTar(CommandUtil rec,String cmd){
 		//执行命令
 		String rs = rec.execute(cmd);
 		log.info(rs);
@@ -70,6 +72,19 @@ public class CommandUtil {
 		//这个方法与上面最大的区别就是，上面的方法，不管执行成功与否都返回，
 		//这个方法呢，如果命令或者脚本执行错误将返回空字符串
 		//rec.executeSuccess("ifconfig");
+		return rs;
+	}
+
+	public static String  cmdTar2(CommandUtil rec,String cmd){
+		//执行命令
+		String rs = rec.execute2(cmd);
+		log.info(rs);
+		//执行脚本
+		//rec.execute("sh /usr/local/tomcat/bin/statup.sh");
+		//这个方法与上面最大的区别就是，上面的方法，不管执行成功与否都返回，
+		//这个方法呢，如果命令或者脚本执行错误将返回空字符串
+		//rec.executeSuccess("ifconfig");
+		return rs;
 	}
 
 
@@ -99,12 +114,15 @@ public class CommandUtil {
 	 * @author Ickes
 	 * 远程执行shll脚本或者命令
 	 * @since V0.1
+	 * 方式1  --这种方式环境变量有问题改用下面方式2
 	 */
 	public String execute(String cmd) {
 		String result = "";
 		try {
 			if (login()) {
 				Session session = conn.openSession();//打开一个会话
+
+				//方式1  --这种方式环境变量有问题改用下面方式2
 				session.execCommand(cmd);//执行命令
 				result = processStdout(session.getStdout(), DEFAULTCHART);
 				//如果为得到标准输出为空，说明脚本执行出错了
@@ -113,6 +131,42 @@ public class CommandUtil {
 				}
 				conn.close();
 				session.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
+	/**
+	 * 方式2
+	 * https://blog.csdn.net/nopainsnogainscsdn/article/details/83095323
+	 * @param cmd 即将执行的命令
+	 * @return 命令执行完后返回的结果值
+	 * @author Ickes
+	 * 远程执行shll脚本或者命令
+	 * @since V0.1
+	 */
+	public String execute2(String cmd) {
+		String result = "";
+		try {
+			if (login()) {
+				Session session = conn.openSession();//打开一个会话
+				session.requestPTY("bash");
+				session.startShell();
+				PrintWriter out = new PrintWriter(session.getStdin());
+				out.println(cmd);
+				out.println("exit");
+				out.close();
+				session.waitForCondition(ChannelCondition.CLOSED | ChannelCondition.EOF | ChannelCondition.EXIT_STATUS, 1*1000);
+				InputStream in = new StreamGobbler(session.getStdout());
+				if(in == null){
+					InputStream stderr = new StreamGobbler(session.getStderr());
+					result = stderr.toString();
+				}else{
+					result = in.toString();
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

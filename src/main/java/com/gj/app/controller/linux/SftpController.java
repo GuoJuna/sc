@@ -49,10 +49,10 @@ public class SftpController {
 	 * @return
 	 * @throws IOException
 	 */
-	@ApiOperation(value = "上传", httpMethod = "POST", produces = "application/json",consumes = "application/json")
+	@ApiOperation(value = "上传文件", httpMethod = "POST", produces = "application/json",consumes = "application/json")
 	@ApiResponse(code = 200, message = "success")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "file",value = "文件",dataType = "MultipartFile", allowMultiple = true)
+			@ApiImplicitParam(name = "file",value = "上传文件",dataType = "MultipartFile", allowMultiple = true)
 	})
 	@RequestMapping("putLe")
 	public AjaxResult putLe(MultipartFile file) throws IOException {
