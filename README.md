@@ -1,1 +1,1 @@
-# myProject
+# Sc Project
