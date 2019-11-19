@@ -1,7 +1,7 @@
 server:
   port: 9090
   servlet:
-    context-path: /myProject
+    context-path: /sc
 
 spring:
   profiles:
@@ -54,7 +54,7 @@ mybatis:
   type-aliases-package: com.gj.app.entity  # 注意：对应实体类的路径
   #config-location: classpath:config/mybatis-config.xml
 
-#pagehelper
+#pagehelperf
 pagehelper:
   helperDialect: mysql
   reasonable: true
