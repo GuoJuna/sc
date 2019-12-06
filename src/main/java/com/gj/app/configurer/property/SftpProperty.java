@@ -5,20 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 功能描述:
- * 模块:
- * 项目:
- * 版本号:V1.0
- * 作者:郭军
- * 邮箱:864350301@qq.com
- * 创建时间:2019/1/3
- * ************************************
- * ************************************
- * 修改人:
- * 修改时间:
- * 修改内容:
- * 1.
- * 2.
+ * @Author guojun
+ * @Email guojun49@qq.com
+ * @Date 2019-12-06 15:23
+ * @Description This is description of class
+ * @Since version-1.0
  */
 @Data
 @Configuration
