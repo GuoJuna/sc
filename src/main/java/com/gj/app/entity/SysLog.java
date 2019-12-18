@@ -1,25 +1,34 @@
 package com.gj.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
 public class SysLog implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "用户id")
     private Long userid;
 
+    @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "用户操作")
     private String operation;
 
+    @ApiModelProperty(value = "响应时间")
     private Integer time;
 
+    @ApiModelProperty(value = "请求方法")
     private String method;
 
+    @ApiModelProperty(value = "请求参数")
     private String params;
 
+    @ApiModelProperty(value = "IP地址")
     private String ip;
 
+    @ApiModelProperty(value = "创建时间")
     private Date gmtcreate;
 
     private static final long serialVersionUID = 1L;
@@ -94,5 +103,25 @@ public class SysLog implements Serializable {
 
     public void setGmtcreate(Date gmtcreate) {
         this.gmtcreate = gmtcreate;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", userid=").append(userid);
+        sb.append(", username=").append(username);
+        sb.append(", operation=").append(operation);
+        sb.append(", time=").append(time);
+        sb.append(", method=").append(method);
+        sb.append(", params=").append(params);
+        sb.append(", ip=").append(ip);
+        sb.append(", gmtcreate=").append(gmtcreate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

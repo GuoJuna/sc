@@ -45,4 +45,19 @@ public class SysConfig implements Serializable {
     public void setSetBy(String setBy) {
         this.setBy = setBy == null ? null : setBy.trim();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", variable=").append(variable);
+        sb.append(", value=").append(value);
+        sb.append(", setTime=").append(setTime);
+        sb.append(", setBy=").append(setBy);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
 }

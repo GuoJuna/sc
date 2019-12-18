@@ -1,37 +1,53 @@
 package com.gj.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
 public class SysUser implements Serializable {
+    @ApiModelProperty(value = "主键id")
     private Integer id;
 
+    @ApiModelProperty(value = "头像")
     private String avatar;
 
+    @ApiModelProperty(value = "账号")
     private String account;
 
+    @ApiModelProperty(value = "密码")
     private String password;
 
+    @ApiModelProperty(value = "md5密码盐")
     private String salt;
 
+    @ApiModelProperty(value = "名字")
     private String name;
 
+    @ApiModelProperty(value = "生日")
     private Date birthday;
 
+    @ApiModelProperty(value = "性别（1：男 2：女）")
     private Integer sex;
 
+    @ApiModelProperty(value = "电子邮件")
     private String email;
 
+    @ApiModelProperty(value = "电话")
     private String phone;
 
+    @ApiModelProperty(value = "角色id")
     private String roleid;
 
+    @ApiModelProperty(value = "部门id")
     private Integer deptid;
 
+    @ApiModelProperty(value = "状态(1：启用  2：冻结  3：删除）")
     private Integer status;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createtime;
 
+    @ApiModelProperty(value = "保留字段")
     private Integer version;
 
     private static final long serialVersionUID = 1L;
@@ -154,5 +170,31 @@ public class SysUser implements Serializable {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", avatar=").append(avatar);
+        sb.append(", account=").append(account);
+        sb.append(", password=").append(password);
+        sb.append(", salt=").append(salt);
+        sb.append(", name=").append(name);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", sex=").append(sex);
+        sb.append(", email=").append(email);
+        sb.append(", phone=").append(phone);
+        sb.append(", roleid=").append(roleid);
+        sb.append(", deptid=").append(deptid);
+        sb.append(", status=").append(status);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", version=").append(version);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

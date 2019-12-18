@@ -1,21 +1,28 @@
 package com.gj.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
 public class SysRole implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "角色名称")
     private String rolename;
 
+    @ApiModelProperty(value = "角色标识")
     private String rolesign;
 
+    @ApiModelProperty(value = "备注")
     private String remark;
 
+    @ApiModelProperty(value = "创建用户id")
     private Long useridcreate;
 
+    @ApiModelProperty(value = "创建时间")
     private Date gmtcreate;
 
+    @ApiModelProperty(value = "创建时间")
     private Date gmtmodified;
 
     private static final long serialVersionUID = 1L;
@@ -74,5 +81,23 @@ public class SysRole implements Serializable {
 
     public void setGmtmodified(Date gmtmodified) {
         this.gmtmodified = gmtmodified;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", rolename=").append(rolename);
+        sb.append(", rolesign=").append(rolesign);
+        sb.append(", remark=").append(remark);
+        sb.append(", useridcreate=").append(useridcreate);
+        sb.append(", gmtcreate=").append(gmtcreate);
+        sb.append(", gmtmodified=").append(gmtmodified);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

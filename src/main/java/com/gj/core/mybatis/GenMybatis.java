@@ -16,7 +16,6 @@ public class GenMybatis {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
 		String filePath = ClassLoader.getSystemResource("generator/generatorConfig.xml").getPath();
-		//String filePath = ClassLoader.getSystemResource("config/generatorConfig2.xml").getPath();
 		System.out.println(filePath);
 		
 		File configFile = new File(filePath);

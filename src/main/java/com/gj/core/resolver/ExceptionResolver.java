@@ -28,7 +28,7 @@ import java.util.concurrent.TimeoutException;
  * 1.
  * 2.
  */
-@ControllerAdvice(basePackages={"com.fc.app.controller"})
+@ControllerAdvice(basePackages={"com.gj.app.controller"})
 @Slf4j
 public class ExceptionResolver {
 	//private static final Logger log = LoggerFactory.getLogger(ExceptionResolver.class);

@@ -3,7 +3,7 @@
 <generatorConfiguration>
 
 	<classPathEntry
-			location="C:\repository\mysql\mysql-connector-java\5.1.47/mysql-connector-java-5.1.47.jar" />
+			location="D:\mvnRespo\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar" />
 	<context id="MySqlTables" targetRuntime="MyBatis3">
 				
 	    <property name="beginningDelimiter" value="`"/>
@@ -15,19 +15,27 @@
 	    <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
 	    <!-- 格式化XML代码 -->
 	    <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
-			
-          
+
+		<!-- 为模型生成序列化方法-->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		<!-- 为生成的Java模型创建一个toString方法 -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
          <!--自定义批量插入--> 
         <plugin type="com.gj.core.plugin.BatchInsertPlugin"></plugin>
         
         <!--自定义批量更新--> 
         <plugin type="com.gj.core.plugin.BatchUpdatePlugin"></plugin>
         
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>          
-		
-		<commentGenerator>
+		<!--<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 			<property name="suppressDate" value="true" />
+		</commentGenerator>-->
+
+		<commentGenerator type="com.gj.core.mybatis.CommentGenerator">
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true"/>
+			<property name="suppressDate" value="true"/>
+			<property name="addRemarkComments" value="true"/>
 		</commentGenerator>
 		
 		

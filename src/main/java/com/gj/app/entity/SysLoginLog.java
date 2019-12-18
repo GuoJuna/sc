@@ -1,21 +1,29 @@
 package com.gj.app.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
 public class SysLoginLog implements Serializable {
+    @ApiModelProperty(value = "主键")
     private Integer id;
 
+    @ApiModelProperty(value = "日志名称")
     private String logname;
 
+    @ApiModelProperty(value = "管理员id")
     private Integer userid;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createtime;
 
+    @ApiModelProperty(value = "是否执行成功")
     private String succeed;
 
+    @ApiModelProperty(value = "登录ip")
     private String ip;
 
+    @ApiModelProperty(value = "具体消息")
     private String message;
 
     private static final long serialVersionUID = 1L;
@@ -74,5 +82,23 @@ public class SysLoginLog implements Serializable {
 
     public void setMessage(String message) {
         this.message = message == null ? null : message.trim();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", logname=").append(logname);
+        sb.append(", userid=").append(userid);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", succeed=").append(succeed);
+        sb.append(", ip=").append(ip);
+        sb.append(", message=").append(message);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

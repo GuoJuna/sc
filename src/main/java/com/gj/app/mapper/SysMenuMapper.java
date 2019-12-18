@@ -2,8 +2,9 @@ package com.gj.app.mapper;
 
 import com.gj.app.entity.SysMenu;
 import com.gj.app.entity.SysMenuExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysMenuMapper {
     long countByExample(SysMenuExample example);
